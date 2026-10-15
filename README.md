@@ -28,6 +28,8 @@ git clone https://github.com/VathilaHerath/chromacloset.git
 cd chromacloset
 # Open index.html in your browser
 
+```
+
 🧠 How the Color Engine Works
 ChromaCloset's color-engine.js implements a full sartorial color science pipeline:
 
@@ -49,21 +51,24 @@ chromacloset/
 ├── wardrobe-data.js    # Wardrobe store with 28 curated starter pieces
 └── assets/
     └── night_party_editorial.png
+
 🎭 Scenarios Supported
-Scenario	Vibe
-🍸 Night Party & Club	Sleek dark foundations, bold accents, high contrast
-🍷 Romantic Date	Warm rich undertones, tailored elegance
-💼 Executive & Business	Crisp neutrals, strict 60-30-10 discipline
-☕ Casual Weekend	Earth tones, relaxed layering
-☀️ Summer Festival	Light pastels, breezy open hues
-🍂 Autumn Layering	Camel, rust, heritage warmth
+Scenario and Vibe
+🍸 Night Party & Club - Sleek dark foundations, bold accents, high contrast
+🍷 Romantic Date - Warm rich undertones, tailored elegance
+💼 Executive & Business	 - Crisp neutrals, strict 60-30-10 discipline
+☕ Casual Weekend - Earth tones, relaxed layering
+☀️ Summer Festival	- Light pastels, breezy open hues
+🍂 Autumn Layering	- Camel, rust, heritage warmth
+
 🛠️ Tech Stack
 Pure HTML5, CSS3, Vanilla JavaScript — zero dependencies, zero frameworks
 Web Audio API — for subtle sound haptics
 SVG — all garment icons and color wheels rendered in-browser
 localStorage — wardrobe and saved looks persist across sessions
+
 💬 Feedback & Suggestions
-This project was vibe coded — built through AI-assisted prompting and iteration. It's a passion project, not a polished product, so there are definitely rough edges!
+This project was vibe coded — built through AI-assisted prompting and iteration. It's a passion project, not a polished product, so there are definitely rough edges! I made this project because I always struggle with finding matching clothes to wear. So if you have felt the same, I hope this would help.
 
 If you try it out, I'd genuinely love to hear:
 
