@@ -3,7 +3,7 @@
 ChromaCloset is a browser-based wardrobe assistant that uses **real color science** to generate harmonious outfit combinations for any occasion — from Night Parties to Executive Boardrooms.
 No AI API keys. No backend. Just pure color theory, running entirely in your browser.
 > ⚡ **Vibe Coded** — This entire app was built through AI-assisted vibe coding sessions. The logic, design, and color engine were all shaped through prompting and iteration rather than traditional engineering. It works, it's fun, but it's very much a work-in-progress — so feedback is very welcome!
-![ChromaCloset Preview](assets/night_party_editorial.png)
+
 ---
 ## ✨ Features
 - **🍸 Scenario Stylist Studio** — Pick an occasion (Night Party, Romantic Date, Business Formal, Casual, Summer, Autumn) and get ranked outfit suggestions tailored to that vibe
