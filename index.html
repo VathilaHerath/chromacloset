@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChromaCloset | Color Theory Wardrobe & Scenario Stylist</title>
+  <meta name="description" content="Intelligent color-matching wardrobe assistant that harmonizes your t-shirts, shirts, jackets, shoes, and socks for any occasion.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- SITE HEADER -->
+    <header class="site-header">
+      <div class="brand-area">
+        <div class="brand-logo-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="#D4AF37" stroke-width="1.8"/>
+            <circle cx="8" cy="10" r="3.2" fill="#10B981"/>
+            <circle cx="16" cy="10" r="3.2" fill="#6366F1"/>
+            <circle cx="12" cy="16" r="3.2" fill="#EC4899"/>
+          </svg>
+        </div>
+        <div class="brand-title-wrap">
+          <h1>CHROMA CLOSET</h1>
+          <span class="brand-tagline">Color Theory & Scenario Wardrobe Stylist</span>
+        </div>
+      </div>
+
+      <!-- NAVIGATION TABS -->
+      <nav class="nav-links">
+        <button class="nav-btn active" data-view="stylist">
+          <span>✨</span> Stylist Studio
+        </button>
+        <button class="nav-btn" data-view="wardrobe">
+          <span>👔</span> My Wardrobe
+        </button>
+        <button class="nav-btn" data-view="theory">
+          <span>🧭</span> Color Theory Lab
+        </button>
+        <button class="nav-btn" data-view="saved">
+          <span>📖</span> Lookbook
+        </button>
+      </nav>
+
+      <!-- HEADER ACTIONS -->
+      <div class="header-actions">
+        <button class="audio-toggle-btn" id="btnAudioToggle" title="Toggle audio haptics">
+          🔊
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="openAddGarmentModal()">
+          + Add Piece
+        </button>
+      </div>
+    </header>
+
+    <!-- ====================================================================
+         VIEW 1: STYLIST STUDIO (SCENARIOS & MATCHING ENGINE)
+         ==================================================================== -->
+    <main id="view-stylist" class="view-section active">
+      <!-- SCENARIO & OCCASION PICKER -->
+      <section class="scenario-selector-panel">
+        <div class="section-label-bar">
+          <div class="section-heading">
+            <span>🍸 Select Your Scenario / Event</span>
+            <span class="heading-sub">The color engine customizes hue contrast, mood, and formality</span>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="openMoodboardModal()" title="View editorial party outfit visual inspiration">
+            ✨ Editorial Party Moodboard
+          </button>
+        </div>
+
+        <div class="scenarios-grid">
+          <!-- Night Party / Clubbing (User's specific request) -->
+          <div class="scenario-card active" data-scenario="night_party">
+            <span class="scenario-icon-lead">🍸</span>
+            <div class="scenario-name">Night Party & Club</div>
+            <div class="scenario-desc">Sleek dark foundations, striking accents, high-contrast glow under dim lights.</div>
+          </div>
+
+          <!-- Romantic Dinner / Date Night -->
+          <div class="scenario-card" data-scenario="romantic_date">
+            <span class="scenario-icon-lead">🍷</span>
+            <div class="scenario-name">Romantic Date</div>
+            <div class="scenario-desc">Warm magnetic undertones, seductive tonal depth, polished tailoring.</div>
+          </div>
+
+          <!-- Executive Business -->
+          <div class="scenario-card" data-scenario="business_formal">
+            <span class="scenario-icon-lead">💼</span>
+            <div class="scenario-name">Executive & Business</div>
+            <div class="scenario-desc">Dignified neutral anchors, strict 60-30-10 discipline, sharp footwear.</div>
+          </div>
+
+          <!-- Casual Weekend -->
+          <div class="scenario-card" data-scenario="casual_coffee">
+            <span class="scenario-icon-lead">☕</span>
+            <div class="scenario-name">Casual Weekend</div>
+            <div class="scenario-desc">Relaxed daylight earth tones, breathable drape, effortless tonal balance.</div>
+          </div>
+
+          <!-- Summer Outdoor -->
+          <div class="scenario-card" data-scenario="summer_day">
+            <span class="scenario-icon-lead">☀️</span>
+            <div class="scenario-name">Summer Festival</div>
+            <div class="scenario-desc">Crisp light-reflecting pastels, breezier linen tones, cheerful open hues.</div>
+          </div>
+
+          <!-- Autumn / Winter Layering -->
+          <div class="scenario-card" data-scenario="autumn_layering">
+            <span class="scenario-icon-lead">🍂</span>
+            <div class="scenario-name">Autumn Layering</div>
+            <div class="scenario-desc">Rich textures, camel & rust harmonies, cozy multi-piece depth.</div>
+          </div>
+        </div>
+
+        <!-- CONTEXT CONTROLS: TIME, TEMPERATURE & HARMONY -->
+        <div class="controls-meta-grid">
+          <!-- Time of Day -->
+          <div class="filter-group-inline">
+            <span class="filter-label-tiny">Time:</span>
+            <div class="time-pills-row">
+              <button class="time-pill active" data-time="night">Night</button>
+              <button class="time-pill" data-time="evening">Evening</button>
+              <button class="time-pill" data-time="afternoon">Afternoon</button>
+              <button class="time-pill" data-time="morning">Morning</button>
+            </div>
+          </div>
+
+          <!-- Color Matching Method -->
+          <div class="filter-group-inline">
+            <span class="filter-label-tiny">Harmony:</span>
+            <div class="method-pills-row">
+              <button class="method-pill active" data-method="all">All</button>
+              <button class="method-pill" data-method="neutral_anchor">Neutral Anchor</button>
+              <button class="method-pill" data-method="complementary">Complementary</button>
+              <button class="method-pill" data-method="monochromatic">Monochromatic</button>
+              <button class="method-pill" data-method="analogous">Analogous</button>
+            </div>
+          </div>
+
+          <!-- Temperature / Weather -->
+          <div class="filter-group-inline custom-select-wrapper">
+            <span class="filter-label-tiny">Weather:</span>
+            <select id="tempSelect">
+              <option value="mild">Mild (18°-24°C)</option>
+              <option value="cold">Cool / Chilly</option>
+              <option value="warm">Warm / Hot</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- DEDICATED PROMINENT ANCHOR PIECE WIDGET (ALWAYS IN FRAME) -->
+        <div id="anchorPieceWidget" class="anchor-piece-bar">
+          <div class="anchor-bar-left">
+            <div class="anchor-icon-badge">🔒</div>
+            <div class="anchor-text-info">
+              <div class="anchor-title">
+                <span>Anchor Piece (Centerpiece)</span>
+                <span id="anchorStatusPill" class="anchor-status-pill">Harmonizing Entire Closet</span>
+              </div>
+              <span class="anchor-subtitle">Lock any garment to formulate and score matching looks around it</span>
+            </div>
+          </div>
+          <div class="anchor-bar-right">
+            <select id="lockItemSelect" class="anchor-select-dropdown">
+              <option value="">None (Harmonize All Wardrobe Pieces)</option>
+            </select>
+            <button id="btnClearLockBtn" class="btn-clear-lock" onclick="clearLockItem()" style="display:none;" title="Clear lock and harmonize all pieces">
+              ✕ Clear Lock
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- STYLIST MAIN SPLIT VIEW -->
+      <div class="stylist-main-content">
+        <!-- LEFT: OUTFIT SHELF / CURATED COMBINATIONS -->
+        <aside class="outfits-shelf-column">
+          <div class="shelf-header">
+            <h3 class="shelf-title">
+              <span>✨ Curated Outfits</span>
+            </h3>
+            <button class="btn-icon-refresh" id="btnRegenerate" title="Regenerate Outfits">
+              ↻
+            </button>
+          </div>
+
+          <div id="outfitsGrid" class="outfits-cards-scroll">
+            <!-- Dynamic outfit cards rendered by app.js -->
+          </div>
+        </aside>
+
+        <!-- RIGHT: OUTFIT STUDIO INSPECTION CANVAS -->
+        <section id="outfitStudioCanvas" class="studio-canvas-container">
+          <!-- Active outfit visual stack, color wheel & notes rendered here -->
+        </section>
+      </div>
+    </main>
+
+    <!-- ====================================================================
+         VIEW 2: MY WARDROBE (INVENTORY & ITEM ADDITION)
+         ==================================================================== -->
+    <section id="view-wardrobe" class="view-section">
+      <div class="wardrobe-controls-bar">
+        <div class="wardrobe-top-actions">
+          <div class="search-input-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="wardrobeSearch" placeholder="Search clothes by name, color, fabric...">
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <span id="wardrobeTotalCount" class="heading-sub" style="font-weight: 700;">28 Garments</span>
+            <button class="btn btn-primary" onclick="openAddGarmentModal()">+ Add New Piece</button>
+            <button class="btn btn-secondary btn-sm" id="btnResetWardrobe" title="Reset to curated starter capsule">
+              ↺ Reset Starter Wardrobe
+            </button>
+          </div>
+        </div>
+
+        <!-- CATEGORY TABS -->
+        <div id="wardrobeCategoryFilters" class="category-chips-row">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- WARDROBE ITEMS GRID -->
+      <div id="wardrobeGrid" class="wardrobe-grid-layout">
+        <!-- Items rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 3: COLOR THEORY LAB (INTERACTIVE EDUCATIONAL COMPONENT)
+         ==================================================================== -->
+    <section id="view-theory" class="view-section">
+      <div class="theory-lab-layout">
+        <!-- LEFT: INTERACTIVE 12-TONE WHEEL -->
+        <div class="theory-wheel-card">
+          <h3>Interactive Fashion Wheel</h3>
+          <p>Click any color to visualize complementary pairs, analogous neighbors, and styling formulas.</p>
+          <div id="theoryWheelContainer" class="interactive-wheel-box"></div>
+        </div>
+
+        <!-- RIGHT: SARTORIAL COLOR HARMONY INTEL -->
+        <div class="theory-intel-card">
+          <div id="theoryDetailsBox">
+            <!-- Rendered dynamically on click -->
+          </div>
+
+          <!-- LIVE PALETTE SIMULATOR / TESTER -->
+          <div class="palette-tester-container" style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-subtle);">
+            <div class="analysis-card-title">
+              <span>🧪 Live Color Synergy Tester</span>
+              <span id="simScoreLabel" class="proportion-tag">Complementary</span>
+            </div>
+            <p class="analysis-subtext">Standing in your room or shopping? Test 3 colors together in real-time to check their harmonic synergy:</p>
+
+            <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 14px; flex-wrap: wrap;">
+              <div style="display: flex; flex-direction: column; gap: 4px;">
+                <label style="font-size: 0.72rem; color: var(--text-dim); font-weight: 700;">TOP / JACKET</label>
+                <input type="color" id="simColor1" value="#111215" class="color-input-native" style="width: 48px; height: 38px;">
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 4px;">
+                <label style="font-size: 0.72rem; color: var(--text-dim); font-weight: 700;">PANTS / SKIRT</label>
+                <input type="color" id="simColor2" value="#0F1D38" class="color-input-native" style="width: 48px; height: 38px;">
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 4px;">
+                <label style="font-size: 0.72rem; color: var(--text-dim); font-weight: 700;">SHOES / ACCENT</label>
+                <input type="color" id="simColor3" value="#631D2D" class="color-input-native" style="width: 48px; height: 38px;">
+              </div>
+
+              <div style="margin-left: auto; text-align: right;">
+                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Match Score</div>
+                <div id="simScoreValue" style="font-size: 1.4rem; font-weight: 800; color: var(--gold-light);">96%</div>
+              </div>
+            </div>
+
+            <div id="simFeedbackText" class="stylist-tip-item" style="font-size: 0.8rem; line-height: 1.45;">
+              Testing harmonious balance...
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 4: LOOKBOOK (SAVED OUTFITS)
+         ==================================================================== -->
+    <section id="view-saved" class="view-section">
+      <div class="section-label-bar" style="margin-bottom: 24px;">
+        <div class="section-heading">
+          <span>📖 Your Personal Lookbook</span>
+          <span class="heading-sub">Favorite outfits saved for quick reference</span>
+        </div>
+      </div>
+
+      <div id="savedLooksGrid" class="saved-looks-grid">
+        <!-- Saved looks rendered dynamically -->
+      </div>
+    </section>
+  </div>
+
+  <!-- ====================================================================
+       MODAL: ADD / EDIT GARMENT
+       ==================================================================== -->
+  <div id="addItemModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Garment to Closet</h3>
+        <button class="modal-close-btn" id="btnCloseAddModal">✕</button>
+      </div>
+
+      <form id="addGarmentForm">
+        <!-- LIVE SVG PREVIEW OF PIECE -->
+        <div class="modal-preview-wrapper" id="modalGarmentPreview">
+          <!-- Live SVG injected -->
+        </div>
+
+        <div class="form-field">
+          <label for="itemName">Garment Name</label>
+          <input type="text" id="itemName" placeholder="e.g., Midnight Silk Camp Shirt, Raw Denim Jeans" required>
+        </div>
+
+        <div class="form-grid-two">
+          <div class="form-field">
+            <label for="itemCategory">Category</label>
+            <select id="itemCategory" required>
+              <option value="tops">Tops (Shirts, Tees, Sweaters)</option>
+              <option value="outerwear">Outerwear (Jackets, Blazers, Coats)</option>
+              <option value="bottoms">Bottoms (Pants, Jeans, Chinos)</option>
+              <option value="footwear">Footwear (Boots, Sneakers, Loafers)</option>
+              <option value="socks">Socks</option>
+              <option value="accessories">Accessories (Belts, Details)</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="itemSubtype">Garment Silhouette</label>
+            <select id="itemSubtype" required>
+              <!-- Populated dynamically based on category -->
+            </select>
+          </div>
+        </div>
+
+        <!-- COLOR SELECTOR -->
+        <div class="form-field">
+          <label>Garment Color (<span id="detectedColorLabel">Obsidian Black</span>)</label>
+          <div class="color-picker-box">
+            <input type="color" id="itemColor" class="color-input-native" value="#111215">
+            <input type="text" id="itemHexText" value="#111215" style="max-width: 120px;">
+          </div>
+          <!-- LUXURY PRESET SWATCHES -->
+          <div class="color-preset-pills">
+            <span class="preset-color-chip" style="background:#111215;" data-hex="#111215" data-name="Obsidian Black" title="Obsidian Black"></span>
+            <span class="preset-color-chip" style="background:#2C3038;" data-hex="#2C3038" data-name="Charcoal Slate" title="Charcoal Slate"></span>
+            <span class="preset-color-chip" style="background:#6B7280;" data-hex="#6B7280" data-name="Heather Gray" title="Heather Gray"></span>
+            <span class="preset-color-chip" style="background:#FFFFFF;" data-hex="#FFFFFF" data-name="Crisp White" title="Crisp White"></span>
+            <span class="preset-color-chip" style="background:#F5EBE1;" data-hex="#F5EBE1" data-name="Sandstone Cream" title="Sandstone Cream"></span>
+            <span class="preset-color-chip" style="background:#C19A6B;" data-hex="#C19A6B" data-name="Camel Tan" title="Camel Tan"></span>
+            <span class="preset-color-chip" style="background:#8B4513;" data-hex="#8B4513" data-name="Rich Cognac" title="Rich Cognac"></span>
+            <span class="preset-color-chip" style="background:#0F1D38;" data-hex="#0F1D38" data-name="Midnight Navy" title="Midnight Navy"></span>
+            <span class="preset-color-chip" style="background:#1D4ED8;" data-hex="#1D4ED8" data-name="Royal Indigo" title="Royal Indigo"></span>
+            <span class="preset-color-chip" style="background:#065F46;" data-hex="#065F46" data-name="Emerald Velvet" title="Emerald Velvet"></span>
+            <span class="preset-color-chip" style="background:#631D2D;" data-hex="#631D2D" data-name="Burgundy Wine" title="Burgundy Wine"></span>
+            <span class="preset-color-chip" style="background:#556B2F;" data-hex="#556B2F" data-name="Olive Utility" title="Olive Utility"></span>
+            <span class="preset-color-chip" style="background:#C86446;" data-hex="#C86446" data-name="Terracotta Clay" title="Terracotta Clay"></span>
+          </div>
+        </div>
+
+        <div class="form-grid-two">
+          <div class="form-field">
+            <label for="itemFormality">Formality</label>
+            <select id="itemFormality">
+              <option value="party_glam">Party & Glamour</option>
+              <option value="smart_casual" selected>Smart Casual</option>
+              <option value="casual">Casual</option>
+              <option value="business_formal">Business Formal</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="itemSeason">Seasonality</label>
+            <select id="itemSeason">
+              <option value="all_season" selected>All Seasons</option>
+              <option value="summer">Summer / Warm</option>
+              <option value="winter">Winter / Cold</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="itemFabric">Fabric / Material</label>
+          <input type="text" id="itemFabric" placeholder="e.g. Silk, Pima Cotton, Cashmere, Leather, Denim">
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 14px;">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('addItemModal').classList.remove('active')">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-glow">+ Add to Wardrobe</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODAL: EDITORIAL PARTY MOODBOARD
+       ==================================================================== -->
+  <div id="moodboardModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3 class="modal-title">🍸 Night Party Sartorial Moodboard</h3>
+        <button class="modal-close-btn" onclick="closeMoodboardModal()">✕</button>
+      </div>
+      <div style="border-radius: var(--radius-md); overflow: hidden; margin-bottom: 18px; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card);">
+        <img src="assets/night_party_editorial.png" alt="Editorial Night Party Outfit Flat-lay" style="width: 100%; display: block; object-fit: cover; max-height: 420px;">
+      </div>
+      <div class="stylist-tips-list">
+        <div class="stylist-tip-item">
+          <strong>1. Deep Obsidian Base:</strong> Night party lighting diffuses subtle pastel tones. Grounding your silhouette in deep black or charcoal creates crisp, striking posture.
+        </div>
+        <div class="stylist-tip-item">
+          <strong>2. The 10% Chroma Pop:</strong> Pair with an alluring jewel tone—such as an Emerald Satin or Burgundy accent—to reflect ambient bar and lounge lighting.
+        </div>
+        <div class="stylist-tip-item">
+          <strong>3. Texture Separation:</strong> High sheen silk/satin juxtaposed against matte wool slacks and glossy leather boots delivers high-fashion luxury without clutter.
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-end; margin-top: 18px;">
+        <button class="btn btn-primary" onclick="closeMoodboardModal()">Apply to My Closet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="appToast" class="toast-notification">Notification</div>
+
+  <!-- SCRIPTS -->
+  <script src="color-engine.js"></script>
+  <script src="wardrobe-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
